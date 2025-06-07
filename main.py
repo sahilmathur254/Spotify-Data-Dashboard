@@ -108,7 +108,7 @@ with tab2:
 
 with tab3:
         st.header("All Platform Stats")
-        st.subheader("Spotfiy")
+        st.subheader("Spotify")
                 
         c1, c2= st.columns(2)
         c3, c4= st.columns(2)
