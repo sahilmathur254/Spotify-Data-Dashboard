@@ -45,6 +45,13 @@ streamlit run main.py
 ```
 This will launch the dashboard in your default web browser.
 
+# Running Tests
+To run the automated tests, use **pytest**:
+
+```sh
+pytest
+```
+
 # Project Structure
 ```sh
 Spotify-Data-Dashboard/
