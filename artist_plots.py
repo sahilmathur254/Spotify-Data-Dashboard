@@ -80,17 +80,21 @@ def plot_top_artists_total_streams_without_tiktok(df):
     fig.update_layout(showlegend=False)
     return fig
 
+
 def plot_top_50_artists_pie(df):
     artists = df['Artist'].value_counts()
     top_50_sum = artists[:50].sum()
-    total_songs = len(artists)
+
+    # total number of songs in the dataset
+    total_songs = artists.sum()
     other_artists_count = len(artists) - 50
-    
-    fig = px.pie(values=[top_50_sum, total_songs - top_50_sum], 
-                 names=['Top 50 artists', f'Other {other_artists_count} artists'], 
-                 title="How many songs do the top 50 artists have?",
-                 color_discrete_sequence=['#4287f5', '#f54287']
-                ).update_traces(textinfo='value')
+
+    fig = px.pie(
+        values=[top_50_sum, total_songs - top_50_sum],
+        names=['Top 50 artists', f'Other {other_artists_count} artists'],
+        title="How many songs do the top 50 artists have?",
+        color_discrete_sequence=['#4287f5', '#f54287']
+    ).update_traces(textinfo='value')
     
     return fig
 
