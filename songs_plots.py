@@ -166,6 +166,7 @@ def plot_top_10_songs_streams_minus_tiktok(df):
 
 
 def plot_top_songs_by_decade(df):
+    """Return a dictionary of bar charts for the top songs in each decade."""
 
     # Defining the decades
     decades = {
@@ -175,6 +176,8 @@ def plot_top_songs_by_decade(df):
         'Pre-2000s': (0, 1999)
     }
 
+    decade_figs = {}
+
     # Plot for each decade
     for decade_name, (start_year, end_year) in decades.items():
         # Filtering the data for the current decade
@@ -183,15 +186,22 @@ def plot_top_songs_by_decade(df):
         # top 10 tracks with the highest total streams for the current decade
         top_10_songs_decade = df_decade.nlargest(10, 'Total Streams')[['Track', 'Artist', 'Total Streams']]
 
-        fig = px.bar(top_10_songs_decade, x='Total Streams', y='Track', 
-                     orientation='h', color='Artist',
-                     title=f'Top 10 Songs by Total Streams in the {decade_name}',
-                     labels={'Total Streams': 'Total Streams', 'Track': 'Song'},
-                     color_discrete_sequence=px.colors.qualitative.Dark24)
+        fig = px.bar(
+            top_10_songs_decade,
+            x='Total Streams',
+            y='Track',
+            orientation='h',
+            color='Artist',
+            title=f'Top 10 Songs by Total Streams in the {decade_name}',
+            labels={'Total Streams': 'Total Streams', 'Track': 'Song'},
+            color_discrete_sequence=px.colors.qualitative.Dark24,
+        )
 
         fig.update_layout(showlegend=False)
 
-        return fig
+        decade_figs[decade_name] = fig
+
+    return decade_figs
 
 
 def plot_top_songs_2020s(df):
